@@ -1,0 +1,16 @@
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  labels:
+    eventing.knative.dev/broker: example-broker
+  name: cloudevents-trigger
+  namespace: default
+spec:
+  broker: example-broker
+  filter: {}
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: cloudevents-sink
+      namespace: default

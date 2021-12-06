@@ -1,0 +1,16 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: cloudevents-source
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+      - image: serdarkalayci/cloudevents-source:1.6
+        ports: 
+          - containerPort: 8080
+        # Uncomment this to send events somewhere.
+        env:
+        - name: K_SINK
+          value: http://broker-ingress.knative-eventing.svc.cluster.local/default/example-broker

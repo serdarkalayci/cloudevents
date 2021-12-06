@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: cloudevents-sink
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+      - image: serdarkalayci/cloudevents-sink:1.5
+        # Uncomment this to send events somewhere.
+        # env:
+        # - name: K_SINK
+        #   value: http://default-broker.default.svc.cluster.local
