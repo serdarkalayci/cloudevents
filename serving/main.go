@@ -12,10 +12,6 @@ import (
 
 type Receiver struct {
 	client cloudevents.Client
-
-	// If the K_SINK environment variable is set, then events are sent there,
-	// otherwise we simply reply to the inbound request.
-	Target string `envconfig:"K_SINK"`
 }
 
 func main() {
@@ -33,12 +29,6 @@ func main() {
 	// we will either reply with our response or send it on to
 	// an event sink.
 	var receiver interface{} // the SDK reflects on the signature.
-	// if r.Target == "" {
-	// 	receiver = r.ReceiveAndReply
-	// } else {
-	// 	receiver = r.ReceiveAndSend
-	// }
-
 	receiver = r.Receive
 
 	if err := client.StartReceiver(context.Background(), receiver); err != nil {
