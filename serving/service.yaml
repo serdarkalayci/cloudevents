@@ -5,10 +5,10 @@ metadata:
   namespace: default
 spec:
   template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/target: "10"
     spec:
+      containerConcurrency: 5
       containers:
       - image: serdarkalayci/cloudevents-serving:1.6
-        # Uncomment this to send events somewhere.
-        # env:
-        # - name: K_SINK
-        #   value: http://default-broker.default.svc.cluster.local
